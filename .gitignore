@@ -1,0 +1,3 @@
+manifests/secret.yaml
+*.local.yaml
+.DS_Store

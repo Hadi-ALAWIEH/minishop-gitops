@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minishop-config
+  namespace: minishop
+data:
+  ASPNETCORE_HTTP_PORTS: "8080"
+  REDIS_URL: "redis:6379"
+  POSTGRES_DB: minishop
+  POSTGRES_USER: minishop
+

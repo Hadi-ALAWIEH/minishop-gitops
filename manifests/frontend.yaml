@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: minishop
+  labels: {app: frontend}
+spec:
+  type: ClusterIP
+  selector: {app: frontend}
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: minishop
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: frontend}
+  template:
+    metadata:
+      labels: {app: frontend}
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/hadi-alawieh/minishop-frontend:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            httpGet: {path: /, port: http}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /, port: http}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 25m, memory: 32Mi}
+            limits: {cpu: 200m, memory: 128Mi}

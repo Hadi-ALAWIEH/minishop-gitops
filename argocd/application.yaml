@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minishop
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/GHCR_USERNAME/minishop-gitops.git
+    targetRevision: HEAD
+    path: manifests
+    directory:
+      exclude: secret.example.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: minishop
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=false
+
