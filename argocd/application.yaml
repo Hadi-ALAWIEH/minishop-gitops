@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/GHCR_USERNAME/minishop-gitops.git
+    repoURL: https://github.com/hadi-alawieh/minishop-gitops.git
     targetRevision: HEAD
     path: manifests
     directory:
@@ -17,4 +17,3 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=false
-
